@@ -1,6 +1,4 @@
-/vendor/*
+#/vendor/*
 /config/app.php
 /tmp/*
 /logs/*
-/plugins/*
-/tests/*
