@@ -1,25 +1,24 @@
-# CakePHP Application Skeleton
+# CakePHP App: HoneyDo
 
-[![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
-[![License](https://img.shields.io/packagist/l/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
+I started building this app as my first MVC project, to learn the ropes, if you will. 
+I find it common for people learning/teaching MVC to start off with simple projects like this, to wrap the student's head around MVC, and how things should be coded. I took that idea, and added a social aspect to it. 
 
-A skeleton for creating applications with [CakePHP](http://cakephp.org) 3.x.
+#Here's the workflow:
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+1. User creates an account with a username, a password, a first name, and maybe their last name
+2. User can create tasks for themselves, or can request a Honeyship with another user, possibly many, but I was more directing the initial project at spouses and partners. 
+3. Honeyships enable one partner to assign To Dos to the other, like "Grab some milk while you're at the store."
+4. Once a task is completed, the task is removed from the ToDo list view, and is only accessible on the Completed Task page.
 
-## Installation
+#TODO as of last commit: 
+1. Functionalize the Honey feature
+	* establish relationships between users
+	* ability to assign ToDos to honeys, and to self. 
+2. Change password feature for users
+3. Beautify UI
 
-1. Download [Composer](http://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
-
-If Composer is installed globally, run
-```bash
-composer create-project --prefer-dist cakephp/app [app_name]
-```
-
-You should now be able to visit the path to where you installed the app and see the default home page.
-
-## Configuration
-
-Read and edit `config/app.php` and setup the 'Datasources' and any other
-configuration relevant for your application.
+Possible future extensions:
+- Mobile App API
+- Multiple Honeyships
+- Profile UI
+- User search (for searching for specific Honeys)
