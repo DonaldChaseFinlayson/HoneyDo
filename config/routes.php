@@ -82,9 +82,20 @@ Router::scope(
     '/users',
     ['controller' => 'Users'],
     function($routes){
-        $routes->connect('/honeys/:userFrom/' =>[
-            'action' => 'honeyUp'])
-});
+        $routes->connect('/search/*' , ['action' => 'userSearch']);
+    }
+);
+/*Router::scope(
+    '/users',
+    ['controller' => 'Users'],
+    function($routes){
+        $routes->connect(
+            ['/honeys/:userFrom/' 
+            =>[
+            'action' => 'honeyUp'
+                ]
+            ]);
+});*/
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.

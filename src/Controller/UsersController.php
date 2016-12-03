@@ -8,6 +8,7 @@ use Cake\Event\Event;
  *
  * @property \App\Model\Table\UsersTable $Users
  */
+
 class UsersController extends AppController
 {
 
@@ -18,15 +19,10 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users,
-            [
-                'conditions' => [
-                    'Users.id' => $this->Auth->user('id'),
-                ]
-            ]);
-
-        $this->set(compact('users'));
-        $this->set('_serialize', ['users']);
+        $id = $this->Auth->user('id');
+        $this->redirect(['action' => 'view', $id]);
+        /*$this->set(compact('users'));
+        $this->set('_serialize', ['users']);*/
     }
 
     /**
@@ -38,10 +34,13 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => ['Todos']
-        ]);
-
+        if($this->Auth->user('id') == $id){
+            $user = $this->Users->get($id, [
+                'contain' => ['Todos']
+            ]);
+        } else {
+            $user = $this->Users->get($id);
+        }
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
@@ -83,16 +82,19 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Changes have been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('The changes could not be saved. Please, try again.'));
             }
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }
+    /*public function list()
+    {
 
+    }*/
     /**
      * Delete method
      *
@@ -105,27 +107,32 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('The user has been removed.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The user could not be removed. Please, try again.'));
         }
 
         return $this->redirect($this->Auth->logout());
     }
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
-        $this->Auth->allow(['add', 'logout']);
+        $this->Auth->allow(['add', 'logout', 'view', 'userSearch']);
     }
     public function login($newLogin = false)
     {
         if ($this->request->is('post')) {
+            $user = $this->request->data;
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Invalid username or password, please try again'));
         }
+    }
+    public function userSearch()
+    {
+
     }
     public function logout()
     {
@@ -137,20 +144,16 @@ class UsersController extends AppController
     }
     public function isAuthorized($user) 
     {
-        $action = $this->request->params['action'];
-        // The add action requires no one to be signed in.
-        // All other actions require an id.
-        if (empty($this->request->params['pass'][0])) {
-            return false;
+        if(empty($this->request->params['pass'][0]) && !$user == false){
+            return true;
         }
-
         // Check that the bookmark belongs to the current user.
         $id = $this->request->params['pass'][0];
         $viewUser = $this->Users->get($id);
-        
         if ($viewUser->id === $user['id']) {
             return true;
         }
-        return parent::isAuthorized();
+        // If not, return false (or other AppController funcionality to be added)
+        return parent::isAuthorized($user);
     }
 }

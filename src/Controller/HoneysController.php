@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Honeys Controller
@@ -21,7 +22,12 @@ class HoneysController extends AppController
         $this->paginate = [
             'contain' => ['Users']
         ];
-        $honeys = $this->paginate($this->Honeys);
+        $honeys = $this->paginate($this->Honeys, 
+            [
+                'conditions' => [
+                    'Honeys.userfrom_id' => $this->Auth->user('id'),
+                ]
+            ]);
 
         $this->set(compact('honeys'));
         $this->set('_serialize', ['honeys']);
@@ -93,7 +99,11 @@ class HoneysController extends AppController
         $this->set(compact('honey', 'users'));
         $this->set('_serialize', ['honey']);
     }
-
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add', 'index', 'view']);
+    }
     /**
      * Delete method
      *

@@ -1,3 +1,4 @@
+<?php $authUser = $this->request->session()->read('Auth.User'); ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -10,7 +11,7 @@
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->id) ?></h3>
+    <h3><?= h($user->firstname ." ". $user->lastname) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Username') ?></th>
@@ -34,7 +35,7 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Todos') ?></h4>
+        <h4><?= __($user->firstname . '\'s To dos') ?></h4>
         <?php if (!empty($user->todos)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -60,6 +61,9 @@
             </tr>
             <?php endforeach; ?>
         </table>
+        <?php else: ?>
+            <h3>You do not have permission to access <?= $user->firstname ?>'s To Do list.</h3>
+            <p><?php if(!isset($authUser)): ?> Please login, and <?php endif; ?>Send <?= $user->firstname ?> a request to be your Honey.</p>
         <?php endif; ?>
     </div>
 </div>

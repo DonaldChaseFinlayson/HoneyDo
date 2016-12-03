@@ -47,6 +47,16 @@ $user = $this->request->session()->read('Auth.User');
             <?php else: ?>
                 <li><?=$this->html->link(__('Login'), ['controller' => 'users', 'action' => 'login'])?></li>
             <?php endif; ?>
+                <li><?=$this->Form->create(null, [
+                        'url' => ['controller' => 'Users', 'action' => 'search']
+                    ])?>
+                    <?=$this->Form->input('UserSearch', 
+                    [
+                    'placeholder' => 'Search by email, First name, or Last name', 
+                    'label' => false
+                    ]);?>
+                    <?=$this->Form->end() ?>
+                </li>
                 <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
             </ul>
         </div>

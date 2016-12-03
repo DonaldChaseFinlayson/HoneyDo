@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6d8c082f656bd3e981932ad404f964fc",
-    "content-hash": "8ff4b464cc5fcf2fbd4731d1f8d4cd00",
+    "hash": "b0791b40a58437c09f7ef15b87d22382",
+    "content-hash": "fb45bd3214a7312e34f5ba65001964d7",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -397,6 +397,54 @@
                 "php mobile detect"
             ],
             "time": "2016-11-11 14:56:25"
+        },
+        {
+            "name": "narendravaghela/cakephp-remember-me",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/narendravaghela/cakephp-remember-me.git",
+                "reference": "ac38cc5112ecbd23303ff23f92278a1c87d32b56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/narendravaghela/cakephp-remember-me/zipball/ac38cc5112ecbd23303ff23f92278a1c87d32b56",
+                "reference": "ac38cc5112ecbd23303ff23f92278a1c87d32b56",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": ">=3.1.0 <4.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "dev-master",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "RememberMe\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Narendra Vaghela",
+                    "homepage": "http://www.narendravaghela.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "RememberMe plugin for CakePHP",
+            "homepage": "https://github.com/narendravaghela/cakephp-remember-me",
+            "keywords": [
+                "cakephp",
+                "me",
+                "remember"
+            ],
+            "time": "2016-10-26 06:49:13"
         },
         {
             "name": "psr/http-message",
